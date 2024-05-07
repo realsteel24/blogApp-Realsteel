@@ -8,11 +8,10 @@ export const Blog = () => {
   const { id } = useParams();
   const { loading, blog } = useBlog({ id: id || "" });
   if (loading) {
-      return (<div>
+    return (
+      <div>
         <Appbar />
-      <div className="flex justify-center">
-        
-        
+        <div className="flex justify-center">
           <div>
             <BlogSkeleton />
             <BlogSkeleton />
