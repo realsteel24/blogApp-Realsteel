@@ -28,18 +28,21 @@ export const Blogs = () => {
       <div className="flex justify-center">
         <div className="">
           {blogs.map((blog) => (
+            
             <Link to={blog.id}>
               <div key={blog.id}>
+                
                 <BlogCard
                   title={blog.title}
                   content={blog.content}
                   authorname={blog.author.name ?? "Anonymous"}
                   publishedDate="24th June, 2024"
                   type="blogs"
+                  
                 />
               </div>
             </Link>
-          ))}
+          )) }
         </div>
       </div>
     </div>

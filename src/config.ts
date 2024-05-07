@@ -1,1 +1,1 @@
-export const BACKEND_URL = "https://backend.realsteel24.workers.dev";
+export const BACKEND_URL = "https://blog-backend.realsteel24.workers.dev/";
