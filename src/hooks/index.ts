@@ -13,18 +13,17 @@ export const useBlogs = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token") ?? "";
-    var count = 0;
+
     fetch(`${BACKEND_URL}/api/v1/blog/bulk`, {
       headers: { authorization: token },
     })
       .then(async (response: any) => {
         if (!response.ok) {
-          throw new Error("Failed");
+          throw new Error("Failed, you have been signed out");
         }
         const stat = await response.json();
         setBlogs(stat.blogs);
-        count += 1;
-        console.log(count);
+
         setLoading(false);
       })
       .catch((error: Error) => {

@@ -7,25 +7,30 @@ export const FullBlog = ({ blog }: { blog: Blog }) => {
   const navigate = useNavigate();
   const Remove = async () => {
     try {
-      fetch(`${BACKEND_URL}/api/v1/blog/delete`, {
+      console.log(blog.id);
+      const response = await fetch(`${BACKEND_URL}/api/v1/blog/${blog.id}`, {
         method: "DELETE",
-      }).then((response: any) => {
-        console.log(response);
-        navigate("/blogs");
       });
+
+      if (response.ok) {
+        navigate("/blogs");
+        alert("blog deleted!");
+      } else {
+        const message = await response.text();
+        alert(message);
+      }
     } catch (e) {
       console.log(e);
       alert("cann");
     }
-
-    //   console.log("Blog post deleted successfully");
-    //   navigate("/blogs");
-    //   return;
-    // } catch (error: any) {
-    //   console.error("Error deleting blog post:", error.message);
-    //   // Handle error, e.g., display an error message to the user
-    // }
   };
+  //   console.log("Blog post deleted successfully");
+  //   navigate("/blogs");
+  //   return;
+  // } catch (error: any) {
+  //   console.error("Error deleting blog post:", error.message);
+  //   // Handle error, e.g., display an error message to the user
+  // }
 
   return (
     <div className="flex justify-center">
