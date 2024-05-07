@@ -31,8 +31,8 @@ export const FullBlog = ({ blog }: { blog: Blog }) => {
 
   return (
     <div className="flex justify-center">
-      <div className="grid grid-cols-12 px-12 pt-10">
-        <div className="grid col-span-8 ">
+      <div className="grid grid-cols-1 md:grid-cols-4  px-12 md:px-12 pt-10">
+        <div className="grid col-span-3 ">
           <div className="text-3xl font-extrabold">{blog.title}</div>
           <div className="text-slate-500 font-semibold pt-2">
             Published on 24th June
@@ -56,7 +56,7 @@ export const FullBlog = ({ blog }: { blog: Blog }) => {
           </button>
         </div>
 
-        <div className="grid col-span-4 ml-10">
+        <div className="grid col-span-1 md:ml-10">
           <div>
             <div className="text-slate-500">Author</div>
             <div className=""></div>
