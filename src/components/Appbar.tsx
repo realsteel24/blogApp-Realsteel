@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Avatar } from "./BlogCard";
 
 export const Appbar = () => {
-   const username = localStorage.getItem("name") ?? "Anonymous"
+  const username = localStorage.getItem("name") ?? "Anonymous";
   return (
     <div className="border-b flex justify-between px-4 md:px-10 py-3">
       <Link to={"/blogs"}>
