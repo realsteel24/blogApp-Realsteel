@@ -4,7 +4,7 @@ import { Avatar } from "./BlogCard";
 export const Appbar = () => {
    const username = localStorage.getItem("name") ?? "Anonymous"
   return (
-    <div className="border-b flex justify-between px-10 py-3">
+    <div className="border-b flex justify-between px-4 md:px-10 py-3">
       <Link to={"/blogs"}>
         <div className="flex justify-center flex-col text-xl font-semibold">
           Medium

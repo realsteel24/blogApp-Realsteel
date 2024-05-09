@@ -7,6 +7,7 @@ export interface Blog {
   title: string;
   content: string;
   id: string;
+  date: string
 }
 export const useBlogs = () => {
   const [loading, setLoading] = useState(true);

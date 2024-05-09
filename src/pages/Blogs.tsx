@@ -3,6 +3,7 @@ import { Appbar } from "../components/Appbar";
 import { BlogCard } from "../components/BlogCard";
 import { useBlogs } from "../hooks";
 import { BlogSkeleton } from "../components/BlogSkeleton";
+import dateFormat from "dateformat"
 
 export const Blogs = () => {
   const { loading, blogs } = useBlogs();
@@ -22,6 +23,7 @@ export const Blogs = () => {
     );
   }
   return (
+    
     <div>
       <Appbar />
       <div className="flex justify-center">
@@ -32,7 +34,7 @@ export const Blogs = () => {
                 title={blog.title}
                 content={blog.content}
                 authorname={blog.author.name ?? "Anonymous"}
-                publishedDate="24th June, 2024"
+                publishedDate={dateFormat(`${blog.date}`, "mmmm dS, yyyy")}
                 type="blogs"
               />
             </Link>

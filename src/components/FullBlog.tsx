@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { BACKEND_URL } from "../config";
 import { Blog } from "../hooks";
 import { Avatar } from "./BlogCard";
+import dateFormat from "dateformat";
+
 
 export const FullBlog = ({ blog }: { blog: Blog }) => {
   const navigate = useNavigate();
@@ -23,7 +25,9 @@ export const FullBlog = ({ blog }: { blog: Blog }) => {
         <div className="grid col-span-3 ">
           <div className="text-3xl font-extrabold">{blog.title}</div>
           <div className="text-slate-500 font-semibold pt-2">
-            Published on 24th June
+            Published on {dateFormat(`${blog.date}`, "mmmm dS, yyyy")}
+            
+           
           </div>
           <div className="pt-4 text-xl">{blog.content}</div>
           <div className="flex justify-end py-6">
