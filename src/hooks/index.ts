@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { BACKEND_URL } from "../config";
+import { useNavigate } from "react-router-dom";
 
 export interface Blog {
   author: { name: string };
@@ -10,6 +11,7 @@ export interface Blog {
 export const useBlogs = () => {
   const [loading, setLoading] = useState(true);
   const [blogs, setBlogs] = useState<Blog[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token") ?? "";
@@ -28,6 +30,7 @@ export const useBlogs = () => {
       })
       .catch((error: Error) => {
         console.error("error found", error);
+        navigate("/signin");
       });
   }, []);
   return {
@@ -39,6 +42,7 @@ export const useBlogs = () => {
 export const useBlog = ({ id }: { id: string }) => {
   const [loading, setLoading] = useState(true);
   const [blog, setBlog] = useState<Blog>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token") ?? "";
@@ -56,6 +60,7 @@ export const useBlog = ({ id }: { id: string }) => {
       })
       .catch((error: Error) => {
         console.error("error found", error);
+        navigate("/signin");
       });
   }, [id]);
   return {
