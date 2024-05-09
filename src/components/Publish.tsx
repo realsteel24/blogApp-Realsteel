@@ -56,7 +56,7 @@ export const Publish = () => {
         <button
           onClick={handleSubmit}
           type="button"
-          className="text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-white-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+          className="text-black bg-gray-100 hover:bg-black hover:text-white focus:outline-none border border-gray-400 focus:ring-2 focus:ring-white-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
         >
           Publish Post
         </button>

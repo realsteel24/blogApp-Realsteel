@@ -6,29 +6,16 @@ import { Avatar } from "./BlogCard";
 export const FullBlog = ({ blog }: { blog: Blog }) => {
   const navigate = useNavigate();
 
-  async function Remove() {
+  const handleRemove = () => {
     try {
-      console.log(blog.id);
-      const response = await fetch(`${BACKEND_URL}/api/v1/blog/${blog.id}`, {
-        method: "DELETE",
-        headers: {
-          authorization: localStorage.getItem("token") ?? "",
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (response.ok) {
-        navigate("/blogs");
-        alert("blog deleted!");
-      } else {
-        const message = response.ok;
-        alert(message);
-      }
+      removeBlog(blog.id);
+      navigate("/blogs");
+      alert("blog deleted!");
     } catch (e) {
       console.log(e);
       alert("cann");
     }
-  }
+  };
 
   return (
     <div className="flex justify-center">
@@ -61,7 +48,7 @@ export const FullBlog = ({ blog }: { blog: Blog }) => {
                 />
               </svg>
             </button>
-            <button onClick={Remove} className=" mr-3">
+            <button onClick={handleRemove} className=" mr-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -100,3 +87,25 @@ export const FullBlog = ({ blog }: { blog: Blog }) => {
     </div>
   );
 };
+
+export async function removeBlog(id: string) {
+  try {
+    const response = await fetch(`${BACKEND_URL}/api/v1/blog/${id}`, {
+      method: "DELETE",
+      headers: {
+        authorization: localStorage.getItem("token") ?? "",
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.ok) {
+      return true; // Blog deleted successfully
+    } else {
+      const message = await response.text();
+      throw new Error(message);
+    }
+  } catch (error) {
+    console.error("Error deleting blog:", error);
+    throw new Error("An error occurred while deleting the blog.");
+  }
+}

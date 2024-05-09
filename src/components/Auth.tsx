@@ -94,7 +94,9 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
                           }
                           const data = await response.json();
                           console.log(data.jwt);
-                          localStorage.setItem("token", (data.jwt));
+                          console.log(data.name);
+                          localStorage.setItem("token", data.jwt);
+                          localStorage.setItem("name", data.name);
                           navigate("/blogs");
                         } catch (error: any) {
                           console.error("Error signing up:", error.message);
@@ -116,7 +118,8 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
                             throw new Error("Sign in failed");
                           }
                           const data = await response.json();
-                          localStorage.setItem("token", (data.jwt)); 
+                          localStorage.setItem("token", data.jwt);
+                          localStorage.setItem("name", data.name);
 
                           navigate("/blogs");
                         } catch (error: any) {
