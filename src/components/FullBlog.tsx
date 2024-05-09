@@ -42,7 +42,7 @@ export const FullBlog = ({ blog }: { blog: Blog }) => {
           <div className="flex justify-end py-6">
             <button
               onClick={() => {
-                alert("feature coming soon");
+                navigate(`/blogs/edit/${blog.id}`);
               }}
               className="flex justify-end mr-3"
             >

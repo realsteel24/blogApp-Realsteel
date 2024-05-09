@@ -57,6 +57,7 @@ export const useBlog = ({ id }: { id: string }) => {
         const stat = await response.json();
         setBlog(stat.blog);
         setLoading(false);
+        console.log("loaded");
       })
       .catch((error: Error) => {
         console.error("error found", error);

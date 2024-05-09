@@ -6,6 +6,7 @@ import {  Blogs } from "./pages/Blogs";
 import { Blog } from "./pages/Blog";
 import { Publish } from "./components/Publish";
 
+
 function App() {
   return (
     <>
@@ -13,7 +14,8 @@ function App() {
         <Routes>
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
-          <Route path="/blogs/:id" element={<Blog />} />
+          <Route path="/blogs/edit/:id" element={<Blog type="edit"/>} />
+          <Route path="/blogs/:id" element={<Blog type="publish"/>} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/publish" element={<Publish/>} />
         </Routes>

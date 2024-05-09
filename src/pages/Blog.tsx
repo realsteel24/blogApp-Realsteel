@@ -3,8 +3,9 @@ import { useBlog } from "../hooks";
 import { Appbar } from "../components/Appbar";
 import { FullBlog } from "../components/FullBlog";
 import { BlogSkeleton } from "../components/BlogSkeleton";
+import { EditPost } from "../components/EditPost";
 
-export const Blog = () => {
+export const Blog = ({ type }: { type: "publish" | "edit" }) => {
   const { id } = useParams();
   const { loading, blog } = useBlog({ id: id || "" });
   if (loading) {
@@ -27,7 +28,11 @@ export const Blog = () => {
       <div>
         <Appbar />
 
-        <FullBlog blog={blog} />
+        {type === "publish" ? (
+          <FullBlog blog={blog} />
+        ) : (
+          <EditPost blog={blog} />
+        )}
       </div>
     );
   }
