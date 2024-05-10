@@ -81,7 +81,7 @@ export const useBlog = ({ id }: { id: string }) => {
 
 export const useProfile = () => {
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState<Profile>() ?? "";
+  const [user, setUser] = useState<Profile>();
   const { id } = useParams() ?? "";
   const navigate = useNavigate();
   useEffect(() => {
@@ -97,7 +97,6 @@ export const useProfile = () => {
         const stat = await response.json();
         setUser(stat.user);
         setLoading(false);
-        console.log("loaded");
       })
       .catch((error: Error) => {
         console.error("error found", error);

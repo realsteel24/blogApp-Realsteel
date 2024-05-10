@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Appbar } from "./Appbar";
 import { BACKEND_URL } from "../config";
 import { useNavigate } from "react-router-dom";
 
@@ -31,8 +30,6 @@ export const Publish = () => {
   };
   return (
     <div className="">
-      <Appbar />
-
       <div className=" flex justify-center">
         <input
           onChange={(e) => {

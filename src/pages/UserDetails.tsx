@@ -6,6 +6,23 @@ import { LabelledInput } from "../components/Auth";
 export const UserDetails = () => {
   const username = localStorage.getItem("name") ?? "Anonymous";
   const { user, loading } = useProfile();
+  if (loading) {
+    return (
+      <div>
+        <div>
+          <Appbar />
+          <div className="flex justify-center">
+            <div>
+              <BlogSkeleton />
+              <BlogSkeleton />
+              <BlogSkeleton />
+              <BlogSkeleton />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
   if (user) {
     return (
       <div>
@@ -46,23 +63,6 @@ export const UserDetails = () => {
             >
               Save changes
             </button>
-          </div>
-        </div>
-      </div>
-    );
-  } else {
-    loading;
-    return (
-      <div>
-        <div>
-          <Appbar />
-          <div className="flex justify-center">
-            <div>
-              <BlogSkeleton />
-              <BlogSkeleton />
-              <BlogSkeleton />
-              <BlogSkeleton />
-            </div>
           </div>
         </div>
       </div>
