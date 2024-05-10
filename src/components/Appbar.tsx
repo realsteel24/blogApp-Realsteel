@@ -1,8 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Avatar } from "./BlogCard";
 
 export const Appbar = () => {
   const username = localStorage.getItem("name") ?? "Anonymous";
+  const id = localStorage.getItem("id");
+
+  const navigate = useNavigate();
   return (
     <div className="border-b flex justify-between px-4 md:px-10 py-3">
       <Link to={"/blogs"}>
@@ -19,8 +22,13 @@ export const Appbar = () => {
             Create Blog
           </button>
         </Link>
-
-        <Avatar name={username} size="big" />
+        <button
+          onClick={() => {
+            navigate(`/profile/${id}`);
+          }}
+        >
+          <Avatar name={username} size="big" />
+        </button>
       </div>
     </div>
   );

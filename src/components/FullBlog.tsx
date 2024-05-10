@@ -4,7 +4,6 @@ import { Blog } from "../hooks";
 import { Avatar } from "./BlogCard";
 import dateFormat from "dateformat";
 
-
 export const FullBlog = ({ blog }: { blog: Blog }) => {
   const navigate = useNavigate();
 
@@ -26,8 +25,6 @@ export const FullBlog = ({ blog }: { blog: Blog }) => {
           <div className="text-3xl font-extrabold">{blog.title}</div>
           <div className="text-slate-500 font-semibold pt-2">
             Published on {dateFormat(`${blog.date}`, "mmmm dS, yyyy")}
-            
-           
           </div>
           <div className="pt-4 text-xl">{blog.content}</div>
           <div className="flex justify-end py-6">
@@ -81,10 +78,7 @@ export const FullBlog = ({ blog }: { blog: Blog }) => {
               </div>
               <div className="text-2xl font-bold pl-2">{blog.author.name}</div>
             </div>
-            <div className="text-slate-400">
-              A phrase about author to seek attention. I am the fastest man
-              alive!
-            </div>
+            <div className="text-slate-400">{blog.author.about}</div>
           </div>
         </div>
       </div>

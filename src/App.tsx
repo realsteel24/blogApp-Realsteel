@@ -2,10 +2,10 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Signup } from "./pages/Signup";
 import { Signin } from "./pages/Signin";
-import {  Blogs } from "./pages/Blogs";
+import { Blogs } from "./pages/Blogs";
 import { Blog } from "./pages/Blog";
 import { Publish } from "./components/Publish";
-
+import { UserDetails } from "./pages/UserDetails";
 
 function App() {
   return (
@@ -14,10 +14,11 @@ function App() {
         <Routes>
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
-          <Route path="/blogs/edit/:id" element={<Blog type="edit"/>} />
-          <Route path="/blogs/:id" element={<Blog type="publish"/>} />
+          <Route path="/blogs/edit/:id" element={<Blog type="edit" />} />
+          <Route path="/blogs/:id" element={<Blog type="publish" />} />
           <Route path="/blogs" element={<Blogs />} />
-          <Route path="/publish" element={<Publish/>} />
+          <Route path="/publish" element={<Publish />} />
+          <Route path="/profile/:id" element={<UserDetails />} />
         </Routes>
       </BrowserRouter>
     </>

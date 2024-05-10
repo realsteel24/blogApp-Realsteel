@@ -96,7 +96,11 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
                           console.log(data.jwt);
                           console.log(data.name);
                           localStorage.setItem("token", data.jwt);
-                          localStorage.setItem("name", data.name);
+                          localStorage.setItem(
+                            "name",
+                            data.name ?? "Anonymous"
+                          );
+                          localStorage.setItem("id", data.id);
                           navigate("/blogs");
                         } catch (error: any) {
                           console.error("Error signing up:", error.message);
@@ -119,7 +123,11 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
                           }
                           const data = await response.json();
                           localStorage.setItem("token", data.jwt);
-                          localStorage.setItem("name", data.name);
+                          localStorage.setItem(
+                            "name",
+                            data.name ?? "Anonymous"
+                          );
+                          localStorage.setItem("id", data.id);
 
                           navigate("/blogs");
                         } catch (error: any) {
@@ -146,7 +154,7 @@ interface LabelledInputType {
   type?: string;
 }
 
-function LabelledInput({
+export function LabelledInput({
   label,
   placeholder,
   onChange,
