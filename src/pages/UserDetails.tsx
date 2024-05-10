@@ -15,10 +15,37 @@ export const UserDetails = () => {
         </div>
         <div className="flex justify-center">
           <div className="flex-col">
-            <LabelledInput label="ID" placeholder={`${user.id}`} />
-            <LabelledInput label="Email" placeholder={`${user.email}`} />
-            <LabelledInput label="Name" placeholder={`${username}`} />
-            <LabelledInput label="About Me" placeholder={`${user.about}`} />
+            <LabelledInput
+              label="ID"
+              defaultValue={`${user.id}`}
+              placeholder="UserID"
+              disabled
+            />
+            <LabelledInput
+              label="Email"
+              defaultValue={`${user.email}`}
+              placeholder="Email"
+              disabled
+            />
+            <LabelledInput
+              label="Name"
+              defaultValue={`${username}`}
+              placeholder="Full Name"
+            />
+            <LabelledInput
+              label="About Me"
+              defaultValue={`${user.about}`}
+              placeholder="About me"
+            />
+            <button
+              onClick={() => {
+                alert("Feature coming soon");
+              }}
+              type="button"
+              className="mt-2 text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-white-200 font-medium rounded-lg text-sm px-3 py-2.5 text-center me-2 mb-2"
+            >
+              Save changes
+            </button>
           </div>
         </div>
       </div>

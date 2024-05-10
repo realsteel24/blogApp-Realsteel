@@ -152,6 +152,8 @@ interface LabelledInputType {
   placeholder: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   type?: string;
+  defaultValue?: string;
+  disabled?: boolean;
 }
 
 export function LabelledInput({
@@ -159,6 +161,8 @@ export function LabelledInput({
   placeholder,
   onChange,
   type,
+  defaultValue,
+  disabled,
 }: LabelledInputType) {
   return (
     <div>
@@ -172,6 +176,8 @@ export function LabelledInput({
             type={type || "text"}
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-2.5"
             placeholder={placeholder}
+            defaultValue={defaultValue}
+            disabled={disabled}
             required
           />
         </div>
