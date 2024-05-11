@@ -1,9 +1,9 @@
 interface BlogCardProps {
   authorname: string;
-  title: string;
+  title?: string;
   content: string;
-  publishedDate: string;
-  type: "blog" | "blogs";
+  publishedDate?: string;
+  type: "blog" | "blogs" | "comments";
 }
 
 export const BlogCard = ({
@@ -14,15 +14,17 @@ export const BlogCard = ({
   type,
 }: BlogCardProps) => {
   return (
-    <div className="p-4 border-b border-slate-200 pb-4 w-screen max-w-screen-md">
-      <div className="flex">
+    <div className=" border-b border-slate-200 pb-4 pt-4 w-screen max-w-screen-md">
+      <div className="flex ">
         <Avatar name={authorname} size="small" />
         <div className="font-extralight pl-2 text-sm flex justify-center flex-col">
           {authorname}
         </div>
-        <div className="pl-2 text-xs flex justify-center flex-col text-gray-400">
-          &#9679;
-        </div>
+        {type === "comments" ? null : (
+          <div className="pl-2 text-xs flex justify-center flex-col text-gray-400">
+            &#9679;
+          </div>
+        )}
         <div className="font-thin pl-2 text-slate-500 text-sm flex justify-center flex-col">
           {publishedDate}
         </div>
