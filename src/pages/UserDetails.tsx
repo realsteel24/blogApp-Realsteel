@@ -2,10 +2,17 @@ import { Appbar } from "../components/Appbar";
 import { useProfile } from "../hooks";
 import { BlogSkeleton } from "../components/BlogSkeleton";
 import { LabelledInput } from "../components/Auth";
+import { useState } from "react";
+import { BACKEND_URL } from "../config";
+import { useNavigate } from "react-router-dom";
 
 export const UserDetails = () => {
   const username = localStorage.getItem("name") ?? "Anonymous";
   const { user, loading } = useProfile();
+  const [name, setName] = useState(user?.name);
+  const [about, setAbout] = useState(user?.about);
+  const navigate = useNavigate();
+
   if (loading) {
     return (
       <div>
@@ -46,17 +53,49 @@ export const UserDetails = () => {
             />
             <LabelledInput
               label="Name"
-              defaultValue={`${username}`}
+              defaultValue={`${user.name}`}
               placeholder="Full Name"
+              onChange={(e) => {
+                setName(e.target.value);
+                console.log(name);
+              }}
             />
             <LabelledInput
               label="About Me"
               defaultValue={`${user.about}`}
               placeholder="About me"
+              onChange={(e) => {
+                setAbout(e.target.value);
+                console.log(about);
+              }}
             />
             <button
-              onClick={() => {
-                alert("Feature coming soon");
+              onClick={async () => {
+                try {
+                  const response = await fetch(
+                    `${BACKEND_URL}/api/v1/user/${user.id}`,
+                    {
+                      method: "PUT",
+                      body: JSON.stringify({ name, about }),
+                      headers: {
+                        authorization: localStorage.getItem("token") ?? "",
+                        "Content-Type": "application/json",
+                      },
+                    }
+                  );
+                  if (!response.ok) {
+                    throw new Error("Failed to publish post");
+                  }
+                  // Handle success here (optional)
+                  console.log("Details updated!");
+                  alert("Your changes have been saved!");
+
+                  navigate(`/profile/${user.id}`);
+                } catch (error) {
+                  console.error("Error Updating details:", error);
+                  // Handle error here (optional)
+                  alert("Failed to update details. Please try again.");
+                }
               }}
               type="button"
               className="mt-2 text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-white-200 font-medium rounded-lg text-sm px-3 py-2.5 text-center me-2 mb-2"
