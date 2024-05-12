@@ -16,6 +16,12 @@ export interface Profile {
   email: string;
   about: string;
 }
+export interface Comment {
+  content: string;
+  userId: string;
+  id: string;
+  user: { name: string };
+}
 
 export const useBlogs = () => {
   const [loading, setLoading] = useState(true);
@@ -51,6 +57,7 @@ export const useBlogs = () => {
 export const useBlog = ({ id }: { id: string }) => {
   const [loading, setLoading] = useState(true);
   const [blog, setBlog] = useState<Blog>();
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -106,5 +113,35 @@ export const useProfile = () => {
   return {
     loading,
     user,
+  };
+};
+
+export const useComments = () => {
+  const [loading, setLoading] = useState(true);
+  const [comment, setComment] = useState<Comment[]>([]);
+  const { id } = useParams() ?? "";
+  const navigate = useNavigate();
+  useEffect(() => {
+    const token = localStorage.getItem("token") ?? "";
+
+    fetch(`${BACKEND_URL}/api/v1/blog/comment/${id}`, {
+      headers: { authorization: token },
+    })
+      .then(async (response: any) => {
+        if (!response.ok) {
+          throw new Error("Failed");
+        }
+        const stat = await response.json();
+        setComment(stat.comment);
+        setLoading(false);
+      })
+      .catch((error: Error) => {
+        console.error("error found", error);
+        navigate(`/signin`);
+      });
+  }, [id]);
+  return {
+    loading,
+    comment,
   };
 };

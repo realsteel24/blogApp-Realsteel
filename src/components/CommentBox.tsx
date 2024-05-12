@@ -1,43 +1,45 @@
-import { useEffect, useState } from "react";
-import { BlogCard } from "./BlogCard";
+import { useState } from "react";
+
+import { BACKEND_URL } from "../config";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const CommentBox = () => {
-  const [isComment, setIsComment] = useState(false);
-
-  useEffect(() => {
-    setIsComment(true);
-  }, []);
+  const [content, setcontent] = useState("");
+  const blogid = useParams().id;
+  const userId = localStorage.getItem("id");
+  const navigate = useNavigate();
+  const handleSubmit = () => {
+    fetch(`${BACKEND_URL}/api/v1/blog/comment`, {
+      method: "POST",
+      body: JSON.stringify({ content, blogid, userId }), // Send data as JSON string
+      headers: {
+        authorization: localStorage.getItem("token") ?? "",
+        "Content-Type": "application/json",
+      },
+    }).then(async (result: any) => {
+      if (!result.ok) {
+        throw new Error("Failed");
+      }
+      alert("Comment successful");
+      console.log(content);
+      navigate(`/blogs/${blogid}`);
+    });
+  };
   return (
     <div className=" lg:mx-14 pb-8">
-      <div className="grid grid-cols-1 lg:grid-cols-4 px-12 lg:px-16 pt-8 ">
-        <div className="grid col-span-4">Comments</div>
-
-        <div className="grid col-span-4 mt-3">
-          {isComment ? (
-            <BlogCard
-              authorname="Rishika"
-              content="asdapndsak"
-              type="comments"
-            />
-          ) : null}
-        </div>
+      <div className="grid grid-cols-1 lg:grid-cols-4 mx-10 lg:mx-16 pt-8 ">
         <div className="grid col-span-3">
           <textarea
-            onChange={(e) => e}
             id="message"
             rows={4}
             className=" p-2.5  w-full max-w-screen-lg text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
             placeholder="Add a comment"
             defaultValue=""
+            onChange={(e) => setcontent(e.target.value)}
           ></textarea>
         </div>
         <div className="grid col-span-1 md:col-span-3 ml-4 md:mr-1 flex justify-end">
-          <button
-            className="mt-4"
-            onClick={() => {
-              alert("Coming soon");
-            }}
-          >
+          <button className="mt-4" onClick={handleSubmit}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"

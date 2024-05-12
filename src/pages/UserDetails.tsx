@@ -37,7 +37,7 @@ export const UserDetails = () => {
           <BigAvatar name={user.name} />
         </div>
         <div className="flex justify-center">
-          <div className="flex-col">
+          <div className="flex-col w-9/12 md:w-3/12">
             <LabelledInput
               label="ID"
               defaultValue={`${user.id}`}
@@ -82,10 +82,12 @@ export const UserDetails = () => {
                       },
                     }
                   );
+
                   if (!response.ok) {
                     throw new Error("Failed to publish post");
                   }
                   // Handle success here (optional)
+
                   console.log("Details updated!");
                   alert("Your changes have been saved!");
 
