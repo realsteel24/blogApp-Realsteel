@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BlogCard } from "./BlogCard";
 
 export const CommentBox = () => {
   const [isComment, setIsComment] = useState(false);
-  setIsComment(true);
 
+  useEffect(()=> {setIsComment(true)}, []);
   return (
     <div className=" lg:mx-14">
       <div className="grid grid-cols-1 lg:grid-cols-4 px-12 lg:px-16 pt-10 ">
@@ -18,7 +18,6 @@ export const CommentBox = () => {
               type="comments"
             />
           ) : null}
-          {/* Edit here */}
         </div>
         <div className="grid col-span-3">
           <textarea
