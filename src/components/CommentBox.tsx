@@ -3,6 +3,8 @@ import { BlogCard } from "./BlogCard";
 
 export const CommentBox = () => {
   const [isComment, setIsComment] = useState(false);
+  setIsComment(true);
+
   return (
     <div className=" lg:mx-14">
       <div className="grid grid-cols-1 lg:grid-cols-4 px-12 lg:px-16 pt-10 ">
