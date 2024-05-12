@@ -7,7 +7,6 @@ import { BACKEND_URL } from "../config";
 import { useNavigate } from "react-router-dom";
 
 export const UserDetails = () => {
-  const username = localStorage.getItem("name") ?? "Anonymous";
   const { user, loading } = useProfile();
   const [name, setName] = useState(user?.name);
   const [about, setAbout] = useState(user?.about);
@@ -35,7 +34,7 @@ export const UserDetails = () => {
       <div>
         <Appbar />
         <div className="flex justify-center items-center py-9 md:py-12">
-          <BigAvatar name={username} />
+          <BigAvatar name={user.name} />
         </div>
         <div className="flex justify-center">
           <div className="flex-col">
