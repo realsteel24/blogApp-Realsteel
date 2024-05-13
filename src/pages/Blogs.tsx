@@ -3,7 +3,7 @@ import { Appbar } from "../components/Appbar";
 import { BlogCard } from "../components/BlogCard";
 import { useBlogs } from "../hooks";
 import { BlogSkeleton } from "../components/BlogSkeleton";
-import dateFormat from "dateformat"
+import dateFormat from "dateformat";
 
 export const Blogs = () => {
   const { loading, blogs } = useBlogs();
@@ -23,11 +23,10 @@ export const Blogs = () => {
     );
   }
   return (
-    
     <div>
       <Appbar />
       <div className="flex justify-center">
-        <div className="pl-8">
+        <div className="ml-5 mr-5">
           {blogs.map((blog) => (
             <Link to={blog.id} key={blog.id}>
               <BlogCard

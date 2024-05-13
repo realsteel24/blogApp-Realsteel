@@ -139,7 +139,7 @@ export const useComments = () => {
         console.error("error found", error);
         navigate(`/signin`);
       });
-  }, [id]);
+  }, []);
   return {
     loading,
     comment,

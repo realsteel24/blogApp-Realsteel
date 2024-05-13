@@ -34,7 +34,7 @@ export const EditPost = ({ blog }: { blog: Blog }) => {
   };
 
   const handleRemove = () => {
-    removeBlog(blog.id);
+    removeBlog(blog.id, "blog");
     navigate("/blogs");
     alert("blog deleted!");
   };
