@@ -50,7 +50,10 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
                 placeholder="Email address"
                 onChange={(e) => {
                   type === "signup"
-                    ? setPostInputs({ ...postInputs, email: e.target.value })
+                    ? setPostInputs({
+                        ...postInputs,
+                        email: e.target.value.toLowerCase(),
+                      })
                     : setSigninInputs({
                         ...signinInputs,
                         email: e.target.value,
