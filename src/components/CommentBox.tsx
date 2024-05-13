@@ -26,9 +26,9 @@ export const CommentBox = () => {
     });
   };
   return (
-    <div className=" lg:mx-14 pb-8">
-      <div className="grid grid-cols-1 lg:grid-cols-4 mx-10 lg:mx-16 pt-8 ">
-        <div className="grid col-span-3">
+    <div className=" lg:px-14 px-5 pb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-4 mx- lg:mx-16 pt-8 ">
+        <div className="grid col-span-1 lg:col-span-3">
           <textarea
             id="message"
             rows={4}

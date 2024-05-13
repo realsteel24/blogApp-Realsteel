@@ -26,7 +26,7 @@ export const Blogs = () => {
     <div>
       <Appbar />
       <div className="flex justify-center">
-        <div className="ml-5 mr-5">
+        <div className="">
           {blogs.map((blog) => (
             <Link to={blog.id} key={blog.id}>
               <BlogCard

@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { BACKEND_URL } from "../config";
-import { Blog, useComments } from "../hooks";
+import { Blog } from "../hooks";
 import { Avatar, BlogCard } from "./BlogCard";
 import dateFormat from "dateformat";
+import { CommentBox } from "./CommentBox";
 
 export const FullBlog = ({ blog }: { blog: Blog }) => {
   const navigate = useNavigate();
-  const { comment } = useComments();
 
   const handleRemoveBlog = async () => {
     try {
@@ -21,9 +21,9 @@ export const FullBlog = ({ blog }: { blog: Blog }) => {
 
   return (
     <div>
-      <div className="flex justify-center lg:mx-14">
-        <div className="grid grid-cols-1 lg:grid-cols-4 px-12 lg:px-16 pt-10">
-          <div className="grid col-span-3 flex justify-center">
+      <div className="flex justify-start px-4 ">
+        <div className="grid grid-cols-1 px-2 lg:grid-cols-4 pt-10">
+          <div className="grid col-span-1 lg:col-span-3 flex ">
             <div className="text-3xl font-extrabold">{blog.title}</div>
             <div className="text-slate-500 font-semibold pt-2">
               Published on {dateFormat(`${blog.date}`, "mmmm dS, yyyy")}
@@ -51,7 +51,7 @@ export const FullBlog = ({ blog }: { blog: Blog }) => {
                   />
                 </svg>
               </button>
-              <button onClick={handleRemoveBlog} className=" mr-3">
+              <button onClick={handleRemoveBlog} className=" px-3">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -70,14 +70,15 @@ export const FullBlog = ({ blog }: { blog: Blog }) => {
             </div>
           </div>
 
-          <div className="grid col-span-4 lg:col-span-1 lg:ml-10 ">
-           <div>
+          <div className="grid col-span-1 lg:col-span-1 md:mx-6">
+            <div>
               <div className="text-slate-500">Author</div>
-              <div className=""></div>
+
               <div className="flex mt-3 mb-3">
                 <div className="flex justify-center flex-col">
                   <Avatar name={blog.author.name || "Anonymous"} size="big" />
                 </div>
+
                 <div className="text-2xl font-bold pl-2">
                   {blog.author.name}
                 </div>
@@ -85,53 +86,54 @@ export const FullBlog = ({ blog }: { blog: Blog }) => {
               <div className="text-slate-400 ">{blog.author.about}</div>
             </div>
           </div>
-          <div className="lg:grid-col-span-3 ">
-            <div className="font-bold  mt-4 pt-4">Comments</div>
+
+          <div className="grid col-span-1 lg:col-span-2">
+            <div className="font-bold mt-4 pt-4">Comments</div>
             <div className=" mt-3">
-              {comment
-                ? comment.map((com) => (
-                    <div key={com.id} className="flex justify-center">
-                      <BlogCard
-                        authorname={com.user.name}
-                        content={com.content}
-                        type="comments"
+              {blog.comments.map((com) => (
+                <div key={com.id} className="flex justify-center">
+                  <BlogCard
+                    authorname={com.user.name}
+                    content={com.content}
+                    type="comments"
+                  />
+
+                  <button
+                    onClick={async () => {
+                      try {
+                        await removeBlog(com.id, "comment");
+                        navigate(`/blogs/${blog.id}`);
+                        alert("comment deleted!");
+                      } catch (e) {
+                        console.log(e);
+                        alert("cann");
+                      }
+                    }}
+                    className=""
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-3 h-3 mt-1.5  flex justify-center flex-col"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
                       />
-                      <button
-                        onClick={async () => {
-                          try {
-                            await removeBlog(com.id, "comment");
-                            navigate(`/blogs/${blog.id}`);
-                            alert("comment deleted!");
-                          } catch (e) {
-                            console.log(e);
-                            alert("cann");
-                          }
-                        }}
-                        className=" mr-3"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1.5}
-                          stroke="currentColor"
-                          className="w-3 h-3 mt-1.5 ml-2 flex justify-center flex-col"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  ))
-                : null}
+                    </svg>
+                  </button>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </div>
-    </div> 
+      <CommentBox />
+    </div>
   );
 };
 

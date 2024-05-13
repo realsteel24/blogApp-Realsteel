@@ -4,7 +4,6 @@ import { Appbar } from "../components/Appbar";
 import { FullBlog } from "../components/FullBlog";
 import { BlogSkeleton } from "../components/BlogSkeleton";
 import { EditPost } from "../components/EditPost";
-import { CommentBox } from "../components/CommentBox";
 
 export const Blog = ({ type }: { type: "publish" | "edit" }) => {
   const { id } = useParams();
@@ -32,7 +31,7 @@ export const Blog = ({ type }: { type: "publish" | "edit" }) => {
         {type === "publish" ? (
           <div>
             <FullBlog blog={blog} />
-            <CommentBox />
+            
           </div>
         ) : (
           <EditPost blog={blog} />
